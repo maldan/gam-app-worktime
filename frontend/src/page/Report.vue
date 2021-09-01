@@ -24,6 +24,7 @@
         <div class="header">Total</div>
         <div>
           <div>Total hour: {{ totalTime(totalHours) }}</div>
+          <div>Total price: {{ ~~totalPrice }}</div>
         </div>
       </div>
 
@@ -42,6 +43,15 @@
                   .startOf('day')
                   .seconds($root.moment(x.stop).diff($root.moment(x.start), 'seconds'))
                   .format('HH:mm')
+              }}
+            </div>
+            <div>
+              <b>Price:</b>
+              {{
+                ~~(
+                  ($root.moment(x.stop).diff($root.moment(x.start), 'seconds') / 3600) *
+                  ~~hourRate[x.name]
+                )
               }}
             </div>
           </div>
@@ -63,7 +73,12 @@ import { RestApi } from '../util/RestApi';
 
 export default defineComponent({
   components: { Header, History, Schedule, Input, Button },
-  async mounted() {},
+  async mounted() {
+    this.projectList = await RestApi.project.getList();
+    for (let i = 0; i < this.projectList.length; i++) {
+      this.hourRate[this.projectList[i].name] = this.projectList[i].pricePerHour;
+    }
+  },
   methods: {
     totalTime(time: number) {
       const h = ~~(time / 3600);
@@ -78,16 +93,24 @@ export default defineComponent({
         this.toDate,
       );
       this.totalHours = 0;
+      this.totalPrice = 0;
       for (let i = 0; i < this.list.length; i++) {
         this.totalHours += Moment(this.list[i].stop).diff(Moment(this.list[i].start), 'seconds');
+        this.totalPrice +=
+          (Moment(this.list[i].stop).diff(Moment(this.list[i].start), 'seconds') / 3600) *
+          ~~this.hourRate[this.list[i].name];
       }
     },
   },
   data: () => {
     return {
       list: [] as any[],
+      projectList: [] as any[],
+      hourRate: {} as any,
+
       currentDate: new Date(),
       totalHours: 0,
+      totalPrice: 0,
 
       name: '',
       description: '',

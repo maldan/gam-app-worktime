@@ -51,4 +51,48 @@ export const RestApi = {
       ).data.response;
     },
   },
+  project: {
+    async add(
+      name: string,
+      description: string,
+      pricePerHour: number,
+      created: string,
+    ): Promise<void> {
+      return (
+        await Axios.post(`${API_URL}/project`, {
+          name,
+          description,
+          pricePerHour,
+          created,
+        })
+      ).data.response;
+    },
+    async update(
+      id: string,
+      name: string,
+      description: string,
+      pricePerHour: number,
+      created: string,
+    ): Promise<void> {
+      return (
+        await Axios.patch(`${API_URL}/project`, {
+          id,
+          name,
+          description,
+          pricePerHour,
+          created,
+        })
+      ).data.response;
+    },
+
+    async get(id: string): Promise<any> {
+      return (await Axios.get(`${API_URL}/project?id=${id}`)).data.response;
+    },
+    async getList(): Promise<any[]> {
+      return (await Axios.get(`${API_URL}/project/list`)).data.response;
+    },
+    async delete(id: string) {
+      return (await Axios.delete(`${API_URL}/project?id=${id}`)).data.response;
+    },
+  },
 };

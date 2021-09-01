@@ -30,6 +30,7 @@ export default defineComponent({
       items: [
         { name: 'Main', url: '/' },
         { name: 'Report', url: '/report' },
+        { name: 'Project', url: '/project' },
       ],
     };
   },
