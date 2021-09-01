@@ -42,4 +42,13 @@ export const RestApi = {
       return (await Axios.get(`${API_URL}/work/yearMap?date=${date}`)).data.response;
     },
   },
+  report: {
+    async search(name: string, description: string, fromDate: string, toDate: string) {
+      return (
+        await Axios.get(
+          `${API_URL}/report/search?name=${name}&description=${description}&fromDate=${fromDate}&toDate=${toDate}`,
+        )
+      ).data.response;
+    },
+  },
 };

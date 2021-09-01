@@ -1,12 +1,17 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import Main from '../page/Main.vue';
-import Sleep from '../page/Sleep.vue';
+import Report from '../page/Report.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Main',
     component: Main,
+  },
+  {
+    path: '/report',
+    name: 'Report',
+    component: Report,
   },
 ];
 
