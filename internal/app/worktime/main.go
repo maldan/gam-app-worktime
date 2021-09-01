@@ -4,8 +4,9 @@ import (
 	"embed"
 	"flag"
 	"fmt"
-	"os"
 
+	"github.com/maldan/gam-app-worktime/internal/app/worktime/api"
+	"github.com/maldan/gam-app-worktime/internal/app/worktime/core"
 	"github.com/maldan/go-restserver"
 )
 
@@ -19,15 +20,26 @@ func Start(frontFs embed.FS) {
 	var dataDir = flag.String("dataDir", "db", "Data Directory")
 	_ = flag.String("appId", "id", "App id")
 	flag.Parse()
-	
+
 	// Set
 	core.DataDir = *dataDir
+
+	/*m := make([]core.Work, 0)
+	cmhp_file.ReadJSON("./work.json", &m)
+	fff := api.WorkApi{}
+	for _, xx := range m {
+		loc, _ := time.LoadLocation("Europe/Moscow")
+		xx.Start = xx.Start.In(loc)
+		xx.Stop = xx.Stop.In(loc)
+		fff.PostIndex(xx)
+	}
+	fmt.Println(2)*/
 
 	// Init server
 	restserver.Start(fmt.Sprintf("%s:%d", *host, *port), map[string]interface{}{
 		"/": restserver.VirtualFs{Root: "frontend/build/", Fs: frontFs},
 		"/api": map[string]interface{}{
-			"main":  api.MainApi{},
+			"work": api.WorkApi{},
 		},
 	})
 }
