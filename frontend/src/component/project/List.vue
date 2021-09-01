@@ -45,6 +45,7 @@ export default defineComponent({
       this.list = await RestApi.project.getList();
     },
     async remove(item: any) {
+      // A
       if (confirm('Are you sure you want to delete it?')) {
         await RestApi.project.delete(item.id);
         this.refresh();
