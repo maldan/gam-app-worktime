@@ -1,3 +1,9 @@
+## [0.0.5] - 2021-08-14
+
+### Fixed
+-    Add todo
+-    Set current time
+
 ## [0.0.4] - 2021-08-01
 
 ### Fixed
