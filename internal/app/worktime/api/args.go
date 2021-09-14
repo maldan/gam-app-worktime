@@ -5,6 +5,10 @@ import "time"
 type ArgsEmpty struct {
 }
 
+type ArgsId struct {
+	Id string
+}
+
 type ArgsDate struct {
 	Date time.Time `json:"date"`
 }

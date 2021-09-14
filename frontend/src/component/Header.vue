@@ -31,6 +31,7 @@ export default defineComponent({
         { name: 'Main', url: '/' },
         { name: 'Report', url: '/report' },
         { name: 'Project', url: '/project' },
+        { name: 'TODO', url: '/todo' },
       ],
     };
   },

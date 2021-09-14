@@ -19,3 +19,11 @@ type Project struct {
 	PricePerHour int       `json:"pricePerHour"`
 	Created      time.Time `json:"created"`
 }
+
+type Todo struct {
+	Id          string    `json:"id"`
+	Priority    int       `json:"priority"`
+	Description string    `json:"description"`
+	Created     time.Time `json:"created"`
+	Deadline    time.Time `json:"deadline"`
+}

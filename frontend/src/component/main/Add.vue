@@ -10,7 +10,14 @@
       />
 
       <Input icon="date" placeholder="Start..." style="margin-bottom: 10px" v-model="start" />
-      <Input icon="date" placeholder="Stop..." style="margin-bottom: 10px" v-model="stop" />
+      <Input
+        icon="date"
+        placeholder="Stop..."
+        style="margin-bottom: 10px"
+        v-model="stop"
+        functionIcon="date"
+        :functionClick="getCurrentDate"
+      />
 
       <div style="display: flex">
         <Button @click="$emit('close')" text="Cancel" style="margin-right: 5px" />
@@ -21,6 +28,7 @@
 </template>
 
 <script lang="ts">
+import Moment from 'moment';
 import { defineComponent } from 'vue';
 import { RestApi } from '../../util/RestApi';
 import Button from '../Button.vue';
@@ -38,6 +46,9 @@ export default defineComponent({
     async submit() {
       await RestApi.work.add(this.name, this.desription, this.start, this.stop);
       this.$emit('close');
+    },
+    getCurrentDate() {
+      return Moment().format('YYYY-MM-DD HH:mm:ss');
     },
   },
   data() {

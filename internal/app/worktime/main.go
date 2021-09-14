@@ -42,6 +42,7 @@ func Start(frontFs embed.FS) {
 			"work":    api.WorkApi{},
 			"report":  api.ReportApi{},
 			"project": api.ProjectApi{},
+			"todo":    api.TodoApi{},
 		},
 	})
 }

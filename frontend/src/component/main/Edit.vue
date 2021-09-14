@@ -10,7 +10,14 @@
       />
 
       <Input icon="date" placeholder="Start..." style="margin-bottom: 10px" v-model="start" />
-      <Input icon="date" placeholder="Stop..." style="margin-bottom: 10px" v-model="stop" />
+      <Input
+        icon="date"
+        placeholder="Stop..."
+        style="margin-bottom: 10px"
+        v-model="stop"
+        functionIcon="date"
+        :functionClick="getCurrentDate"
+      />
 
       <div style="display: flex">
         <Button @click="$emit('close')" text="Cancel" style="margin-right: 5px" />
@@ -45,6 +52,9 @@ export default defineComponent({
     async submit() {
       await RestApi.work.update(this.id + '', this.name, this.description, this.start, this.stop);
       this.$emit('close');
+    },
+    getCurrentDate() {
+      return Moment().format('YYYY-MM-DD HH:mm:ss');
     },
   },
   data() {
