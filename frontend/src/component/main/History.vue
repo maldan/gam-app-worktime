@@ -65,6 +65,8 @@ export default defineComponent({
   },
   components: { Add, Edit, Task },
   async mounted() {
+    this.color = (await RestApi.config.get())?.activityColor || {};
+
     this.refresh();
   },
   watch: {

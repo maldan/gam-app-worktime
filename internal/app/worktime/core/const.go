@@ -27,3 +27,7 @@ type Todo struct {
 	Created     time.Time `json:"created"`
 	Deadline    time.Time `json:"deadline"`
 }
+
+type Config struct {
+	ActivityColor map[string]string `json:"activityColor"`
+}

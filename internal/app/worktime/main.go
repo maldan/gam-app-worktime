@@ -44,5 +44,8 @@ func Start(frontFs embed.FS) {
 			"project": api.ProjectApi{},
 			"todo":    api.TodoApi{},
 		},
+		"/system": map[string]interface{}{
+			"config": api.ConfigApi{},
+		},
 	})
 }
