@@ -32,7 +32,7 @@ import Moment from 'moment';
 import { defineComponent } from 'vue';
 import { RestApi } from '../../util/RestApi';
 import Button from '../Button.vue';
-import Input from '../Input.vue';
+import Input from '../../gam_sdk_ui/vue/component/Input.vue';
 import Select from '../Select.vue';
 import TextArea from '../TextArea.vue';
 

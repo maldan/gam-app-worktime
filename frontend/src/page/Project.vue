@@ -12,7 +12,7 @@
 import { defineComponent } from 'vue';
 import Header from '../component/Header.vue';
 import List from '../component/project/List.vue';
-import Input from '../component/Input.vue';
+import Input from '../gam_sdk_ui/vue/component/Input.vue';
 import Button from '../component/Button.vue';
 import Moment from 'moment';
 import { RestApi } from '../util/RestApi';
