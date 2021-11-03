@@ -1,39 +1,30 @@
 <template>
   <div :class="$style.window">
-    <ui-input
-      placeholder="Name..."
-      style="margin-bottom: 10px"
-      v-model="$store.state.modal.data.name"
-    />
+    <ui-input placeholder="Name..." :class="$style.field" v-model="$store.state.modal.data.name" />
     <ui-textarea
       placeholder="Description..."
-      style="margin-bottom: 10px"
+      :class="$style.field"
       v-model="$store.state.modal.data.description"
     />
 
     <ui-input
       icon="calendar"
       placeholder="Start..."
-      style="margin-bottom: 10px"
+      :class="$style.field"
       v-model="$store.state.modal.data.start"
     />
     <ui-input
       placeholder="Stop..."
-      style="margin-bottom: 10px"
+      :class="$style.field"
       v-model="$store.state.modal.data.stop"
       icon="calendar"
       functionIcon="stopwatch"
       :functionClick="getCurrentDate"
     />
 
-    <div style="display: flex">
-      <ui-button @click="$store.dispatch('modal/close')" text="Cancel" style="margin-right: 5px" />
-      <ui-button
-        @click="$store.dispatch('modal/ok')"
-        text="Add"
-        icon="plus"
-        style="margin-left: 5px"
-      />
+    <div class="button_group">
+      <ui-button @click="$store.dispatch('modal/close')" text="Cancel" />
+      <ui-button @click="$store.dispatch('modal/ok')" text="Add" icon="plus" />
     </div>
   </div>
 </template>
@@ -57,5 +48,9 @@ export default defineComponent({
 <style lang="scss" module>
 .window {
   min-width: 320px;
+
+  .field {
+    margin-bottom: 10px;
+  }
 }
 </style>

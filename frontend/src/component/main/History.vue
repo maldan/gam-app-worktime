@@ -53,7 +53,7 @@
         />
       </div>
 
-      <div class="task" v-for="(x, i) in list" :key="x">
+      <div class="task" v-for="(x, i) in $store.state.work.history" :key="x">
         <Task
           @edit="(isShowEditForm = true), (itemId = $event)"
           @delete="remove(x)"

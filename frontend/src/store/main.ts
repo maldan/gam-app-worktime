@@ -5,7 +5,6 @@ import { MainTree } from '.';
 
 export type MainStore = {
   API_URL: string;
-  date: Date;
 };
 export type MainActionContext = ActionContext<MainStore, MainTree>;
 
@@ -13,7 +12,6 @@ export default {
   namespaced: true,
   state: {
     API_URL: process.env.VUE_APP_API_URL || `${window.location.origin}/api`,
-    date: new Date(),
   },
   mutations: {},
   actions: {},
