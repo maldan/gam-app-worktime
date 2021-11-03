@@ -32,7 +32,25 @@
       <!-- Header -->
       <div class="header">
         History
-        <img @click="isShowAddForm = true" class="clickable" src="../../asset/add.svg" alt="" />
+        <img
+          @click="
+            $store.dispatch('modal/show', {
+              name: 'add/work',
+              data: {
+                name: '',
+                description: '',
+                start: $root.moment($store.state.main.date).format('YYYY-MM-DD HH:mm:ss'),
+                stop: $root.moment($store.state.main.date).format('YYYY-MM-DD HH:mm:ss'),
+              },
+              onSuccess: () => {
+                $store.dispatch('work/add');
+              },
+            })
+          "
+          class="clickable"
+          src="../../asset/add.svg"
+          alt=""
+        />
       </div>
 
       <div class="task" v-for="(x, i) in list" :key="x">

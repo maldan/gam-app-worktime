@@ -31,12 +31,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { RestApi } from '../../util/RestApi';
-import Header from '../Header.vue';
 import Add from './Add.vue';
 import Edit from './Edit.vue';
 
 export default defineComponent({
-  components: { Header, History, Add, Edit },
+  components: { History, Add, Edit },
   async mounted() {
     this.refresh();
   },

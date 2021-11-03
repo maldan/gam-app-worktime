@@ -1,21 +1,19 @@
 <template>
   <div class="main">
-    <Header />
-
     <div class="body">
       <div class="block">
         <div class="header">Search</div>
         <div>
           <div style="display: flex">
             <div style="flex: 1; margin-right: 10px">
-              <Input icon="title" placeholder="Project name..." v-model="name" style="" />
-              <Input icon="title" placeholder="Project description..." v-model="description" />
+              <ui-input icon="title" placeholder="Project name..." v-model="name" style="" />
+              <ui-input icon="title" placeholder="Project description..." v-model="description" />
             </div>
             <div style="flex: 1; margin-right: 10px">
-              <Input icon="date" placeholder="From date..." v-model="fromDate" />
-              <Input icon="date" placeholder="To date..." v-model="toDate" />
+              <ui-input icon="date" placeholder="From date..." v-model="fromDate" />
+              <ui-input icon="date" placeholder="To date..." v-model="toDate" />
             </div>
-            <Button @click="search()" icon="time" text="Calculate" style="flex: none" />
+            <ui-button @click="search()" icon="time" text="Calculate" style="flex: none" />
           </div>
         </div>
       </div>
@@ -63,16 +61,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Header from '../component/Header.vue';
 import History from '../component/main/History.vue';
 import Schedule from '../component/main/Schedule.vue';
-import Input from '../gam_sdk_ui/vue/component/Input.vue';
-import Button from '../component/Button.vue';
 import Moment from 'moment';
 import { RestApi } from '../util/RestApi';
 
 export default defineComponent({
-  components: { Header, History, Schedule, Input, Button },
+  components: { History, Schedule },
   async mounted() {
     this.projectList = await RestApi.project.getList();
     for (let i = 0; i < this.projectList.length; i++) {

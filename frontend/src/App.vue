@@ -1,5 +1,7 @@
 <template>
+  <ui-header :items="header" />
   <router-view />
+  <ui-modal-view />
 </template>
 
 <script lang="ts">
@@ -67,6 +69,13 @@ export default defineComponent({
       // @ts-ignore
       API_URL: process.env.VUE_APP_API_URL || `${window.location.origin}/api`,
       moment: Moment,
+      console: console,
+      header: [
+        { name: 'Main', url: '/' },
+        { name: 'Report', url: '/report' },
+        { name: 'Project', url: '/project' },
+        { name: 'TODO', url: '/todo' },
+      ],
     };
   },
 });

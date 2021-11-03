@@ -1,16 +1,16 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.window">
-      <Input icon="food" placeholder="Name..." style="margin-bottom: 10px" v-model="name" />
-      <TextArea
+      <ui-input icon="food" placeholder="Name..." style="margin-bottom: 10px" v-model="name" />
+      <ui-textarea
         icon="weight"
         placeholder="Description..."
         style="margin-bottom: 10px"
         v-model="description"
       />
 
-      <Input icon="date" placeholder="Start..." style="margin-bottom: 10px" v-model="start" />
-      <Input
+      <ui-input icon="date" placeholder="Start..." style="margin-bottom: 10px" v-model="start" />
+      <ui-input
         icon="date"
         placeholder="Stop..."
         style="margin-bottom: 10px"
@@ -20,8 +20,8 @@
       />
 
       <div style="display: flex">
-        <Button @click="$emit('close')" text="Cancel" style="margin-right: 5px" />
-        <Button @click="submit()" text="Save" icon="add" style="margin-left: 5px" />
+        <ui-button @click="$emit('close')" text="Cancel" style="margin-right: 5px" />
+        <ui-button @click="submit()" text="Save" icon="add" style="margin-left: 5px" />
       </div>
     </div>
   </div>
@@ -30,17 +30,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { RestApi } from '../../util/RestApi';
-import Button from '../Button.vue';
-import Input from '../../gam_sdk_ui/vue/component/Input.vue';
-import Select from '../Select.vue';
-import TextArea from '../TextArea.vue';
 import Moment from 'moment';
 
 export default defineComponent({
   props: {
     id: String,
   },
-  components: { Button, Input, Select, TextArea },
+  components: {},
   async mounted() {
     const task = await RestApi.work.get(this.id + '');
     this.name = task.name;

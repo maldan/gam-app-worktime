@@ -1,25 +1,25 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.window">
-      <Input icon="food" placeholder="Name..." style="margin-bottom: 10px" v-model="name" />
-      <TextArea
+      <ui-input icon="food" placeholder="Name..." style="margin-bottom: 10px" v-model="name" />
+      <ui-textarea
         icon="weight"
         placeholder="Description..."
         style="margin-bottom: 10px"
         v-model="desription"
       />
 
-      <Input
+      <ui-input
         icon="weight"
         placeholder="Price per hour..."
         style="margin-bottom: 10px"
         v-model="pricePerHour"
       />
-      <Input icon="date" placeholder="Stop..." style="margin-bottom: 10px" v-model="created" />
+      <ui-input icon="date" placeholder="Stop..." style="margin-bottom: 10px" v-model="created" />
 
       <div style="display: flex">
-        <Button @click="$emit('close')" text="Cancel" style="margin-right: 5px" />
-        <Button @click="submit()" text="Add" icon="add" style="margin-left: 5px" />
+        <ui-button @click="$emit('close')" text="Cancel" style="margin-right: 5px" />
+        <ui-button @click="submit()" text="Add" icon="add" style="margin-left: 5px" />
       </div>
     </div>
   </div>
@@ -28,15 +28,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { RestApi } from '../../util/RestApi';
-import Button from '../Button.vue';
-import Input from '../../gam_sdk_ui/vue/component/Input.vue';
-import Select from '../Select.vue';
-import TextArea from '../TextArea.vue';
 import Moment from 'moment';
 
 export default defineComponent({
   props: {},
-  components: { Button, Input, Select, TextArea },
+  components: {},
   async mounted() {},
   methods: {
     async submit() {

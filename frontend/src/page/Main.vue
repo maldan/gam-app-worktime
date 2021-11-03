@@ -1,7 +1,5 @@
 <template>
   <div class="main">
-    <Header />
-
     <div class="body">
       <History :date="currentDate" />
       <Schedule @select="currentDate = $event" />
@@ -11,12 +9,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Header from '../component/Header.vue';
 import History from '../component/main/History.vue';
 import Schedule from '../component/main/Schedule.vue';
 
 export default defineComponent({
-  components: { Header, History, Schedule },
+  components: { History, Schedule },
   async mounted() {},
   methods: {},
   data: () => {

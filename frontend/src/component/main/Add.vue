@@ -1,27 +1,27 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.window">
-      <Input icon="food" placeholder="Name..." style="margin-bottom: 10px" v-model="name" />
-      <TextArea
-        icon="weight"
-        placeholder="Description..."
-        style="margin-bottom: 10px"
-        v-model="desription"
-      />
+      <ui-input placeholder="Name..." style="margin-bottom: 10px" v-model="name" />
+      <ui-textarea placeholder="Description..." style="margin-bottom: 10px" v-model="desription" />
 
-      <Input icon="date" placeholder="Start..." style="margin-bottom: 10px" v-model="start" />
-      <Input
-        icon="date"
+      <ui-input
+        icon="calendar"
+        placeholder="Start..."
+        style="margin-bottom: 10px"
+        v-model="start"
+      />
+      <ui-input
         placeholder="Stop..."
         style="margin-bottom: 10px"
         v-model="stop"
-        functionIcon="date"
+        icon="calendar"
+        functionIcon="stopwatch"
         :functionClick="getCurrentDate"
       />
 
       <div style="display: flex">
-        <Button @click="$emit('close')" text="Cancel" style="margin-right: 5px" />
-        <Button @click="submit()" text="Add" icon="add" style="margin-left: 5px" />
+        <ui-button @click="$emit('close')" text="Cancel" style="margin-right: 5px" />
+        <ui-button @click="submit()" text="Add" icon="plus" style="margin-left: 5px" />
       </div>
     </div>
   </div>
@@ -31,16 +31,12 @@
 import Moment from 'moment';
 import { defineComponent } from 'vue';
 import { RestApi } from '../../util/RestApi';
-import Button from '../Button.vue';
-import Input from '../../gam_sdk_ui/vue/component/Input.vue';
-import Select from '../Select.vue';
-import TextArea from '../TextArea.vue';
 
 export default defineComponent({
   props: {
     date: Object,
   },
-  components: { Button, Input, Select, TextArea },
+  components: {},
   async mounted() {},
   methods: {
     async submit() {

@@ -90,7 +90,7 @@ export default defineComponent({
   },
   components: {},
   async mounted() {
-    this.refresh();
+    await this.refresh();
     this.changeDate();
 
     this.keyboardEvent = document.addEventListener('keydown', (e: KeyboardEvent) => {
@@ -161,6 +161,8 @@ export default defineComponent({
       for (let x in this.map) {
         this.total += ~~(this.map as any)[x] as number;
       }
+
+      this.changeDate();
     },
     changeDate() {
       // @ts-ignore

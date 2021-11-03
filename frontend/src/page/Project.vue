@@ -1,7 +1,5 @@
 <template>
   <div class="main">
-    <Header />
-
     <div class="body">
       <List />
     </div>
@@ -10,15 +8,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Header from '../component/Header.vue';
 import List from '../component/project/List.vue';
-import Input from '../gam_sdk_ui/vue/component/Input.vue';
-import Button from '../component/Button.vue';
 import Moment from 'moment';
 import { RestApi } from '../util/RestApi';
 
 export default defineComponent({
-  components: { Header, History, List, Input, Button },
+  components: { History, List },
   async mounted() {},
   methods: {},
   data: () => {
