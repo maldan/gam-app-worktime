@@ -1,7 +1,29 @@
 <template>
   <div class="main">
     <div class="body">
-      <History :date="currentDate" />
+      <ui-block title="hour map">
+        <HourMap />
+      </ui-block>
+      <ui-block
+        title="history"
+        icon="plus"
+        @iconClick="
+          $store.dispatch('modal/show', {
+            name: 'add/work',
+            data: {
+              name: '',
+              description: '',
+              start: $root.moment($store.state.main.date).format('YYYY-MM-DD HH:mm:ss'),
+              stop: $root.moment($store.state.main.date).format('YYYY-MM-DD HH:mm:ss'),
+            },
+            onSuccess: () => {
+              $store.dispatch('work/add');
+            },
+          })
+        "
+      >
+        <History />
+      </ui-block>
       <ui-block title="schedule">
         <ui-schedule
           :map="$store.state.work.yearMap"
@@ -19,10 +41,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import HourMap from '../component/main/HourMap.vue';
 import History from '../component/main/History.vue';
 
 export default defineComponent({
-  components: { History },
+  components: { HourMap, History },
   async mounted() {
     this.$store.dispatch('work/setDate', new Date());
   },
@@ -44,8 +67,10 @@ export default defineComponent({
 
   .body {
     margin-top: 10px;
-    display: flex;
+    display: grid;
     height: calc(100% - 110px);
+    gap: 10px;
+    grid-template-columns: 200px 260px 1fr;
   }
 }
 </style>
