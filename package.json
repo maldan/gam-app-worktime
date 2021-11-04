@@ -1,6 +1,6 @@
 {
   "name": "@maldan/gam-app-worktime",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Work Time",
   "main": "index.js",
   "scripts": {},
