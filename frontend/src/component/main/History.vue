@@ -3,7 +3,6 @@
     <div class="task" v-for="(x, i) in $store.state.work.history" :key="x">
       <Task
         @edit="(isShowEditForm = true), (itemId = $event)"
-        @delete="remove(x)"
         :item="x"
         :nextItem="$store.state.work.history[i + 1]"
         :date="date"
@@ -31,7 +30,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .task_list {
-  margin-right: 10px;
   overflow-y: auto;
   height: max-content;
   max-height: 100%;

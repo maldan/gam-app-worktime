@@ -18,18 +18,23 @@
     <div :class="$style.body">
       <div :class="$style.name">
         <div v-html="item.description.replace(/\n/g, '<br>')"></div>
-        <img
-          @click="$emit('edit', item.id)"
-          class="clickable"
-          src="../../asset/pencil.svg"
-          alt=""
-          style="margin-left: auto"
-        />
-        <img
-          @click="$emit('delete', item.id)"
-          class="clickable"
-          src="../../asset/trash.svg"
-          alt=""
+
+        <ui-button :class="$style.button" icon="pencil" size="empty" style="margin-left: auto" />
+        <ui-button
+          @click="
+            $store.dispatch('modal/show', {
+              name: 'approve',
+              data: {
+                title: 'Remove this task?',
+              },
+              onSuccess: () => {
+                $store.dispatch('work/remove', item.id);
+              },
+            })
+          "
+          :class="$style.button"
+          icon="trash"
+          size="empty"
         />
       </div>
     </div>
@@ -123,7 +128,7 @@ export default defineComponent({
       display: flex;
       color: #ffe10c;
 
-      img {
+      .button {
         margin-left: 15px;
       }
     }

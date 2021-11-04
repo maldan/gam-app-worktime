@@ -128,5 +128,11 @@ export default {
       await action.dispatch('getHistory');
       await action.dispatch('getYearMap');
     },
+    async remove(action: WorkActionContext, taskId: string) {
+      await Axios.delete(`${action.rootState.main.API_URL}/work?id=${taskId}`);
+
+      await action.dispatch('getHistory');
+      await action.dispatch('getYearMap');
+    },
   },
 };

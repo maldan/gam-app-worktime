@@ -70,7 +70,7 @@ export default defineComponent({
     display: grid;
     height: calc(100% - 110px);
     gap: 10px;
-    grid-template-columns: 200px 260px 1fr;
+    grid-template-columns: 200px 290px 1fr;
   }
 }
 </style>

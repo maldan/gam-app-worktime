@@ -17,6 +17,7 @@ type Project struct {
 	Name         string    `json:"name"`
 	Description  string    `json:"description"`
 	PricePerHour int       `json:"pricePerHour"`
+	Color        string    `json:"color"`
 	Created      time.Time `json:"created"`
 }
 

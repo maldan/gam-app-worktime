@@ -62,12 +62,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import History from '../component/main/History.vue';
-import Schedule from '../component/main/Schedule.vue';
 import Moment from 'moment';
 import { RestApi } from '../util/RestApi';
 
 export default defineComponent({
-  components: { History, Schedule },
+  components: { History },
   async mounted() {
     this.projectList = await RestApi.project.getList();
     for (let i = 0; i < this.projectList.length; i++) {
