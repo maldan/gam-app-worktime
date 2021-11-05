@@ -7,4 +7,11 @@ import Event from '../src/gam_sdk_ui/vue/event';
 import '../src/gam_sdk_ui/vue/style/main.scss';
 import './main.scss';
 
-createApp(App).use(UI).use(Event).use(Router).use(Store).mount('#app');
+(async () => {
+  const app = createApp(App);
+  app.use(UI).use(Event).use(Router).use(Store).mount('#app');
+
+  await Store.dispatch('project/getList');
+  await Store.dispatch('work/setDate', new Date());
+  await Store.dispatch('todo/getList');
+})();

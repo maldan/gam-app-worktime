@@ -7,7 +7,6 @@ export type WorkStore = {
   history: any[];
   yearMap: any[];
   date: Date;
-  color: any;
   hourMap: any[];
   isToday: boolean;
 };
@@ -19,7 +18,6 @@ export default {
     history: [],
     yearMap: {},
     date: new Date('1970-01-01'),
-    color: {},
     hourMap: [],
     isToday: false,
   },
@@ -81,7 +79,7 @@ export default {
         const hour = ~~absTime;
         let offset = absTime - hour;
         let hourOffset = 0;
-        const color = action.state.color[action.state.history[i].name];
+        const color = action.rootState.project.color[action.state.history[i].name];
 
         for (let j = 0; j < 10; j++) {
           const reminder = duration - (1 - offset);
@@ -124,6 +122,12 @@ export default {
     },
     async add(action: WorkActionContext) {
       await Axios.post(`${action.rootState.main.API_URL}/work`, action.rootState.modal.data);
+
+      await action.dispatch('getHistory');
+      await action.dispatch('getYearMap');
+    },
+    async update(action: WorkActionContext) {
+      await Axios.patch(`${action.rootState.main.API_URL}/work`, action.rootState.modal.data);
 
       await action.dispatch('getHistory');
       await action.dispatch('getYearMap');

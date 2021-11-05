@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div :class="$style.main">
     <ui-block
       title="project list"
       icon="plus"
@@ -19,12 +19,25 @@
         })
       "
     >
-      <div class="item" v-for="item in $store.state.project.list" :key="item.id">
-        <div><b>Name:</b> {{ item.name }}</div>
-        <div><b>Description:</b> {{ item.description }}</div>
-        <div><b>Price per hour:</b> {{ item.pricePerHour }}</div>
-        <div><b>Created:</b> {{ $root.moment(item.created).format('DD MMM YYYY') }}</div>
-        <div style="position: absolute; right: 10px; top: 10px">
+      <div :class="$style.item" v-for="item in $store.state.project.list" :key="item.id">
+        <div :class="$style.icons">
+          <ui-button
+            @click="
+              $store.dispatch('modal/show', {
+                name: 'add/project',
+                data: {
+                  ...item,
+                  created: $root.moment(item.created).format('YYYY-MM-DD HH:mm:ss'),
+                },
+                onSuccess: () => {
+                  $store.dispatch('project/add');
+                },
+              })
+            "
+            icon="copy"
+            size="compact-square"
+            :class="$style.icon"
+          />
           <ui-button
             @click="
               $store.dispatch('modal/show', {
@@ -39,8 +52,8 @@
               })
             "
             icon="pencil"
-            size="empty"
-            style="margin-left: auto"
+            size="compact-square"
+            :class="$style.icon"
           />
           <ui-button
             @click="
@@ -55,8 +68,19 @@
               })
             "
             icon="trash"
-            size="empty"
+            size="compact-square"
+            :class="$style.icon"
           />
+        </div>
+
+        <div :class="$style.field"><span>Name</span> {{ item.name }}</div>
+        <div :class="$style.field"><span>Description</span> {{ item.description }}</div>
+        <div :class="$style.field"><span>Price per hour</span> {{ item.pricePerHour }}</div>
+        <div :class="$style.field" :style="{ color: item.color }">
+          <span>Color</span> {{ item.color }}
+        </div>
+        <div :class="$style.field">
+          <span>Created</span> {{ $root.moment(item.created).format('DD MMM YYYY') }}
         </div>
       </div>
     </ui-block>
@@ -65,10 +89,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import List from '../component/project/List.vue';
 
 export default defineComponent({
-  components: { List },
+  components: {},
   async mounted() {
     this.$store.dispatch('project/getList');
   },
@@ -81,16 +104,58 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
+@import '../gam_sdk_ui/vue/style/size.scss';
+@import '../gam_sdk_ui/vue/style/color.scss';
+
 .main {
   box-sizing: border-box;
   height: calc(100% - 50px);
-  padding: 10px;
+  padding: $gap-base;
 
   .item {
     position: relative;
-    padding: 10px;
-    border-bottom: 1px solid #555555;
+    padding: $gap-base;
+    background-color: $gray-medium;
+    margin-bottom: $gap-base;
+
+    .field {
+      display: flex;
+      align-items: center;
+      margin-bottom: $gap-base;
+      color: $text-gray;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      > span {
+        background: $gray-dark;
+        color: $text-gray;
+        font-size: 14px;
+        padding: 3px 7px;
+        border-radius: 4px;
+        width: 140px;
+        display: block;
+        margin-right: $gap-base;
+        text-transform: uppercase;
+      }
+    }
+
+    .icons {
+      display: flex;
+      position: absolute;
+      right: $gap-base;
+      top: $gap-base;
+
+      .icon {
+        margin-left: $gap-base;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 </style>

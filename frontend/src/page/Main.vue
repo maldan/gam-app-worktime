@@ -46,9 +46,7 @@ import History from '../component/main/History.vue';
 
 export default defineComponent({
   components: { HourMap, History },
-  async mounted() {
-    this.$store.dispatch('work/setDate', new Date());
-  },
+  async mounted() {},
   methods: {},
   data: () => {
     return {
@@ -70,7 +68,7 @@ export default defineComponent({
     display: grid;
     height: calc(100% - 110px);
     gap: 10px;
-    grid-template-columns: 200px 290px 1fr;
+    grid-template-columns: 200px 340px 1fr;
   }
 }
 </style>

@@ -1,51 +1,46 @@
 <template>
   <div :class="$style.window">
-    <ui-input placeholder="Name..." :class="$style.field" v-model="$store.state.modal.data.name" />
+    <ui-input
+      placeholder="Priority..."
+      :class="$style.field"
+      v-model="$store.state.modal.data.priority"
+    />
     <ui-textarea
       placeholder="Description..."
       :class="$style.field"
       v-model="$store.state.modal.data.description"
     />
-
     <ui-input
-      placeholder="Start..."
-      :class="$style.field"
-      v-model="$store.state.modal.data.start"
       icon="calendar"
-      functionIcon="stopwatch"
-      :functionClick="getCurrentDate"
+      placeholder="Created..."
+      :class="$style.field"
+      v-model="$store.state.modal.data.created"
     />
     <ui-input
-      placeholder="Stop..."
-      :class="$style.field"
-      v-model="$store.state.modal.data.stop"
       icon="calendar"
-      functionIcon="stopwatch"
-      :functionClick="getCurrentDate"
+      placeholder="Deadline..."
+      :class="$style.field"
+      v-model="$store.state.modal.data.deadline"
     />
-
     <div class="button_group">
       <ui-button @click="$store.dispatch('modal/close')" text="Cancel" />
-      <ui-button @click="$store.dispatch('modal/ok')" text="Add" icon="plus" />
+      <ui-button @click="$store.dispatch('modal/ok')" text="Save" icon="check" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Moment from 'moment';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   props: {},
   components: {},
   async mounted() {},
-  methods: {
-    getCurrentDate() {
-      return Moment().format('YYYY-MM-DD HH:mm:ss');
-    },
-  },
+  methods: {},
   data() {
-    return {};
+    return {
+      image: '',
+    };
   },
 });
 </script>

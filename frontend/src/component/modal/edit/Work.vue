@@ -26,7 +26,7 @@
 
     <div class="button_group">
       <ui-button @click="$store.dispatch('modal/close')" text="Cancel" />
-      <ui-button @click="$store.dispatch('modal/ok')" text="Add" icon="plus" />
+      <ui-button @click="$store.dispatch('modal/ok')" text="Save" icon="check" />
     </div>
   </div>
 </template>

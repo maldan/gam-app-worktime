@@ -5,6 +5,7 @@ import { MainTree } from '.';
 
 export type ProjectStore = {
   list: any[];
+  color: any;
 };
 export type ProjectActionContext = ActionContext<ProjectStore, MainTree>;
 
@@ -12,10 +13,15 @@ export default {
   namespaced: true,
   state: {
     list: [],
+    color: {},
   },
   mutations: {
     SET_LIST(state: ProjectStore, list: any[]) {
       state.list = list;
+
+      for (let i = 0; i < list.length; i++) {
+        state.color[list[i].name] = list[i].color || '#cccccc';
+      }
     },
   },
   actions: {

@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import Main from '../page/Main.vue';
 import Report from '../page/Report.vue';
 import Project from '../page/Project.vue';
-import TODO from '../page/TODO.vue';
+import Todo from '../page/Todo.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -22,8 +22,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/todo',
-    name: 'TODO',
-    component: TODO,
+    name: 'Todo',
+    component: Todo,
   },
 ];
 
