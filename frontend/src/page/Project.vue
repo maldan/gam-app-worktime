@@ -1,8 +1,10 @@
 <template>
   <div :class="$style.main">
     <ui-block
+      :class="$style.block"
       title="project list"
       icon="plus"
+      :scrollY="true"
       @iconClick="
         $store.dispatch('modal/show', {
           name: 'add/project',
@@ -109,52 +111,58 @@ export default defineComponent({
 @import '../gam_sdk_ui/vue/style/color.scss';
 
 .main {
-  box-sizing: border-box;
-  height: calc(100% - 50px);
   padding: $gap-base;
+  height: calc(100% - 50px);
+  box-sizing: border-box;
+  display: flex;
 
-  .item {
-    position: relative;
-    padding: $gap-base;
-    background-color: $gray-medium;
-    margin-bottom: $gap-base;
+  .block {
+    flex: 1;
+    min-height: 0;
 
-    .field {
-      display: flex;
-      align-items: center;
+    .item {
+      position: relative;
+      padding: $gap-base;
+      background-color: $gray-medium;
       margin-bottom: $gap-base;
-      color: $text-gray;
+
+      .field {
+        display: flex;
+        align-items: center;
+        margin-bottom: $gap-base;
+        color: $text-gray;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        > span {
+          background: $gray-dark;
+          color: $text-gray;
+          font-size: 14px;
+          padding: 3px 7px;
+          border-radius: 4px;
+          width: 140px;
+          display: block;
+          margin-right: $gap-base;
+          text-transform: uppercase;
+        }
+      }
+
+      .icons {
+        display: flex;
+        position: absolute;
+        right: $gap-base;
+        top: $gap-base;
+
+        .icon {
+          margin-left: $gap-base;
+        }
+      }
 
       &:last-child {
         margin-bottom: 0;
       }
-
-      > span {
-        background: $gray-dark;
-        color: $text-gray;
-        font-size: 14px;
-        padding: 3px 7px;
-        border-radius: 4px;
-        width: 140px;
-        display: block;
-        margin-right: $gap-base;
-        text-transform: uppercase;
-      }
-    }
-
-    .icons {
-      display: flex;
-      position: absolute;
-      right: $gap-base;
-      top: $gap-base;
-
-      .icon {
-        margin-left: $gap-base;
-      }
-    }
-
-    &:last-child {
-      margin-bottom: 0;
     }
   }
 }

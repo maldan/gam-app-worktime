@@ -1,8 +1,10 @@
 <template>
   <div :class="$style.main">
     <ui-block
+      :class="$style.block"
       title="todo list"
       icon="plus"
+      :scrollY="true"
       @iconClick="
         $store.dispatch('modal/show', {
           name: 'add/todo',
@@ -18,6 +20,7 @@
         })
       "
     >
+      <ui-input :class="$style.filter" icon="title" placeholder="Filter..." v-model="filter" />
       <div :class="$style.list">
         <div
           v-for="item in list"
@@ -139,69 +142,77 @@ export default defineComponent({
   padding: $gap-base;
   height: calc(100% - 50px);
   box-sizing: border-box;
+  display: flex;
 
-  .list {
-    height: 100%;
-    overflow-y: auto;
+  .block {
+    flex: 1;
 
-    .block {
-      font-size: 15px;
+    .filter {
       margin-bottom: $gap-base;
+    }
 
-      .header {
-        display: flex;
-        align-items: flex-end;
+    .list {
+      min-height: 0;
 
-        .left,
-        .right,
-        .left2 {
+      .block {
+        font-size: 15px;
+        margin-bottom: $gap-base;
+
+        .header {
+          display: flex;
+          align-items: flex-end;
+
+          .left,
+          .right,
+          .left2 {
+            padding: 10px 15px;
+            background-color: $gray-medium;
+            border-radius: 6px 6px 0 0;
+            color: $text-gray;
+            font-weight: bold;
+
+            span {
+              color: $text-gray;
+              font-style: italic;
+              font-weight: 300;
+            }
+          }
+
+          .left {
+            color: #cfda1e;
+          }
+
+          .left2 {
+            margin-left: $gap-base;
+            color: #1edaab;
+            font-weight: bold;
+          }
+
+          .right {
+            margin-left: $gap-base;
+          }
+
+          .icons {
+            display: flex;
+            margin-left: auto;
+
+            .icon {
+              margin-left: $gap-base;
+              margin-bottom: $gap-base;
+            }
+          }
+        }
+
+        .body {
           padding: 10px 15px;
           background-color: $gray-medium;
-          border-radius: 6px 6px 0 0;
+          border-radius: 0 0 6px 6px;
           color: $text-gray;
-          font-weight: bold;
-
-          span {
-            color: $text-gray;
-            font-style: italic;
-            font-weight: 300;
-          }
         }
 
-        .left {
-          color: #cfda1e;
+        &:last-child {
+          margin-bottom: 0;
         }
-
-        .left2 {
-          margin-left: $gap-base;
-          color: #1edaab;
-          font-weight: bold;
-        }
-
-        .right {
-          margin-left: $gap-base;
-        }
-
-        .icons {
-          display: flex;
-          margin-left: auto;
-
-          .icon {
-            margin-left: $gap-base;
-            margin-bottom: $gap-base;
-          }
-        }
-      }
-
-      .body {
-        padding: 10px 15px;
-        background-color: $gray-medium;
-        border-radius: 0 0 6px 6px;
-        color: $text-gray;
-      }
-
-      &:last-child {
-        margin-bottom: 0;
       }
     }
   }

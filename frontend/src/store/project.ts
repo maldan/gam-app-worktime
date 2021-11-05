@@ -6,6 +6,7 @@ import { MainTree } from '.';
 export type ProjectStore = {
   list: any[];
   color: any;
+  hourRate: any;
 };
 export type ProjectActionContext = ActionContext<ProjectStore, MainTree>;
 
@@ -14,6 +15,7 @@ export default {
   state: {
     list: [],
     color: {},
+    hourRate: {},
   },
   mutations: {
     SET_LIST(state: ProjectStore, list: any[]) {
@@ -21,6 +23,7 @@ export default {
 
       for (let i = 0; i < list.length; i++) {
         state.color[list[i].name] = list[i].color || '#cccccc';
+        state.hourRate[list[i].name] = ~~list[i].pricePerHour;
       }
     },
   },

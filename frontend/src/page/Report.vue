@@ -1,72 +1,93 @@
 <template>
-  <div class="main">
-    <div class="body">
-      <div class="block">
-        <div class="header">Search</div>
+  <div :class="$style.main">
+    <ui-block :class="$style.block" title="filter">
+      <div :class="$style.filter_body">
         <div>
-          <div style="display: flex">
-            <div style="flex: 1; margin-right: 10px">
-              <ui-input icon="title" placeholder="Project name..." v-model="name" style="" />
-              <ui-input icon="title" placeholder="Project description..." v-model="description" />
-            </div>
-            <div style="flex: 1; margin-right: 10px">
-              <ui-input icon="date" placeholder="From date..." v-model="fromDate" />
-              <ui-input icon="date" placeholder="To date..." v-model="toDate" />
-            </div>
-            <ui-button @click="search()" icon="time" text="Calculate" style="flex: none" />
-          </div>
+          <ui-input
+            :class="$style.input"
+            icon="title"
+            placeholder="Project name..."
+            v-model="$store.state.report.name"
+            style=""
+          />
+          <ui-input
+            :class="$style.input"
+            icon="calendar"
+            placeholder="From date..."
+            v-model="$store.state.report.fromDate"
+          />
         </div>
-      </div>
-
-      <div class="block total">
-        <div class="header">Total</div>
         <div>
-          <div>Total hour: {{ totalTime(totalHours) }}</div>
-          <div>Total price: {{ ~~totalPrice }}</div>
+          <ui-input
+            :class="$style.input"
+            icon="title"
+            placeholder="Project description..."
+            v-model="$store.state.report.description"
+          />
+          <ui-input
+            :class="$style.input"
+            icon="calendar"
+            placeholder="To date..."
+            v-model="$store.state.report.toDate"
+          />
         </div>
+        <ui-button
+          @click="$store.dispatch('report/getList')"
+          icon="stopwatch"
+          text="Calculate"
+          style="flex: none"
+        />
       </div>
+    </ui-block>
 
-      <div class="block result">
-        <div class="header">Results</div>
-        <div class="list">
-          <div class="item" v-for="x in list" :key="x.id">
-            <div><b>Name:</b> {{ x.name }}</div>
-            <div><b>Description:</b> {{ x.description }}</div>
-            <div><b>Created:</b> {{ $root.moment(x.start).format('DD MMM YYYY') }}</div>
-            <div>
-              <b>Duration:</b>
-              {{
-                $root
-                  .moment()
-                  .startOf('day')
-                  .seconds($root.moment(x.stop).diff($root.moment(x.start), 'seconds'))
-                  .format('HH:mm')
-              }}
-            </div>
-            <div>
-              <b>Price:</b>
-              {{
-                ~~(
-                  ($root.moment(x.stop).diff($root.moment(x.start), 'seconds') / 3600) *
-                  ~~hourRate[x.name]
-                )
-              }}
-            </div>
-          </div>
+    <ui-block :class="$style.block" title="total">
+      <div :class="$style.item">
+        <div :class="$style.field">
+          <span>Total time</span> {{ totalTime($store.state.report.totalTime) }}
+        </div>
+        <div :class="$style.field">
+          <span>Total price</span> {{ ~~$store.state.report.totalPrice }}
         </div>
       </div>
-    </div>
+    </ui-block>
+
+    <ui-block :class="$style.block" title="result" :scroll-y="true">
+      <div :class="$style.item" v-for="x in $store.state.report.list" :key="x.id">
+        <div :class="$style.field"><span>Name</span> {{ x.name }}</div>
+        <div :class="$style.field"><span>Description</span> {{ x.description }}</div>
+        <div :class="$style.field">
+          <span>Created</span> {{ $root.moment(x.start).format('DD MMM YYYY') }}
+        </div>
+        <div :class="$style.field">
+          <span>Duration</span>
+          {{
+            $root
+              .moment()
+              .startOf('day')
+              .seconds($root.moment(x.stop).diff($root.moment(x.start), 'seconds'))
+              .format('HH:mm')
+          }}
+        </div>
+        <div :class="$style.field">
+          <span>Price</span>
+          {{
+            ~~(
+              ($root.moment(x.stop).diff($root.moment(x.start), 'seconds') / 3600) *
+              ~~hourRate[x.name]
+            )
+          }}
+        </div>
+      </div>
+    </ui-block>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import History from '../component/main/History.vue';
-import Moment from 'moment';
 import { RestApi } from '../util/RestApi';
 
 export default defineComponent({
-  components: { History },
+  components: {},
   async mounted() {
     this.projectList = await RestApi.project.getList();
     for (let i = 0; i < this.projectList.length; i++) {
@@ -80,7 +101,7 @@ export default defineComponent({
       return `${h} h ${~~m} m`;
     },
     async search() {
-      this.list = await RestApi.report.search(
+      /*this.list = await RestApi.report.search(
         this.name,
         this.description,
         this.fromDate,
@@ -93,7 +114,7 @@ export default defineComponent({
         this.totalPrice +=
           (Moment(this.list[i].stop).diff(Moment(this.list[i].start), 'seconds') / 3600) *
           ~~this.hourRate[this.list[i].name];
-      }
+      }*/
     },
   },
   data: () => {
@@ -105,47 +126,88 @@ export default defineComponent({
       currentDate: new Date(),
       totalHours: 0,
       totalPrice: 0,
-
-      name: '',
-      description: '',
-      fromDate: Moment().format('YYYY-MM-DD'),
-      toDate: Moment().format('YYYY-MM-DD'),
     };
   },
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
+@import '../gam_sdk_ui/vue/style/size.scss';
+@import '../gam_sdk_ui/vue/style/color.scss';
+
 .main {
   box-sizing: border-box;
-  height: 100%;
-  padding: 10px;
+  height: calc(100% - 50px);
+  padding: $gap-base;
+  display: grid;
+  grid-template-rows: max-content max-content 1fr;
 
-  .body {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    height: calc(100% - 60px);
+  .block {
+    margin-bottom: $gap-base;
+    min-height: 0;
 
-    .total {
-      margin-top: 10px;
-      color: #999999;
+    &:last-child {
+      margin-bottom: 0;
     }
 
-    .result {
-      height: calc(100% - 120px);
-      overflow: hidden;
-      margin-top: 10px;
+    .filter_body {
+      background-color: $gray-medium;
+      padding: $gap-base;
+      display: grid;
+      gap: $gap-base;
+      grid-template-columns: 1fr 1fr 1fr;
 
-      .list {
-        height: calc(100% - 25px);
-        overflow-y: auto;
+      .input {
+        margin-bottom: $gap-base;
 
-        .item {
-          padding: 5px;
-          color: #999999;
-          border-bottom: 1px solid #383838;
+        &:last-child {
+          margin-bottom: 0;
         }
+      }
+    }
+
+    .item {
+      position: relative;
+      padding: $gap-base;
+      background-color: $gray-medium;
+      margin-bottom: $gap-base;
+
+      .field {
+        display: flex;
+        align-items: center;
+        margin-bottom: $gap-base;
+        color: $text-gray;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        > span {
+          background: $gray-dark;
+          color: $text-gray;
+          font-size: 14px;
+          padding: 3px 7px;
+          border-radius: 4px;
+          width: 140px;
+          display: block;
+          margin-right: $gap-base;
+          text-transform: uppercase;
+        }
+      }
+
+      .icons {
+        display: flex;
+        position: absolute;
+        right: $gap-base;
+        top: $gap-base;
+
+        .icon {
+          margin-left: $gap-base;
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
