@@ -2,3 +2,4 @@
 /app*
 /.history
 /db
+/copy.sh
