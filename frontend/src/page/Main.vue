@@ -14,8 +14,8 @@
           data: {
             name: '',
             description: '',
-            start: $root.moment($store.state.main.date).format('YYYY-MM-DD HH:mm:ss'),
-            stop: $root.moment($store.state.main.date).format('YYYY-MM-DD HH:mm:ss'),
+            start: $root.moment($store.state.work.date).format('YYYY-MM-DD HH:mm:ss'),
+            stop: $root.moment($store.state.work.date).format('YYYY-MM-DD HH:mm:ss'),
           },
           onSuccess: () => {
             $store.dispatch('work/add');
@@ -24,7 +24,11 @@
       "
     >
       <div class="task" v-for="(x, i) in $store.state.work.history" :key="x">
-        <Task :item="x" :nextItem="$store.state.work.history[i + 1]" :date="date" />
+        <Task
+          :item="x"
+          :nextItem="$store.state.work.history[i + 1]"
+          :date="$store.state.work.date"
+        />
       </div>
     </ui-block>
     <ui-block title="schedule">

@@ -14,12 +14,14 @@
       icon="calendar"
       placeholder="Created..."
       :class="$style.field"
+      type="datetime"
       v-model="$store.state.modal.data.created"
     />
     <ui-input
       icon="calendar"
       placeholder="Deadline..."
       :class="$style.field"
+      type="datetime"
       v-model="$store.state.modal.data.deadline"
     />
     <div class="button_group">

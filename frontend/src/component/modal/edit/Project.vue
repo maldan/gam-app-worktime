@@ -22,6 +22,7 @@
       icon="calendar"
       placeholder="Created..."
       :class="$style.field"
+      type="date"
       v-model="$store.state.modal.data.created"
     />
     <div class="button_group">

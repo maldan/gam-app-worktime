@@ -44,8 +44,8 @@
                 name: 'edit/work',
                 data: {
                   ...item,
-                  start: $root.moment(item.start).format('YYYY-MM-DD HH:mm:ss'),
-                  stop: $root.moment(item.stop).format('YYYY-MM-DD HH:mm:ss'),
+                  //start: $root.moment(item.start).format('YYYY-MM-DD HH:mm:ss'),
+                  //stop: $root.moment(item.stop).format('YYYY-MM-DD HH:mm:ss'),
                 },
                 onSuccess: () => {
                   $store.dispatch('work/update');

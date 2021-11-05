@@ -9,6 +9,7 @@
 
     <ui-input
       placeholder="Start..."
+      type="datetime"
       :class="$style.field"
       v-model="$store.state.modal.data.start"
       icon="calendar"
@@ -17,6 +18,7 @@
     />
     <ui-input
       placeholder="Stop..."
+      type="datetime"
       :class="$style.field"
       v-model="$store.state.modal.data.stop"
       icon="calendar"

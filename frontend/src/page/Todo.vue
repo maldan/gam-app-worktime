@@ -20,7 +20,9 @@
         })
       "
     >
-      <ui-input :class="$style.filter" icon="title" placeholder="Filter..." v-model="filter" />
+      <div :class="$style.filter_block">
+        <ui-input :class="$style.filter" icon="title" placeholder="Filter..." v-model="filter" />
+      </div>
       <div :class="$style.list">
         <div
           v-for="item in list"
@@ -147,7 +149,9 @@ export default defineComponent({
   .block {
     flex: 1;
 
-    .filter {
+    .filter_block {
+      background-color: $gray-medium;
+      padding: $gap-base;
       margin-bottom: $gap-base;
     }
 

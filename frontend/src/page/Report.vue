@@ -14,6 +14,9 @@
             :class="$style.input"
             icon="calendar"
             placeholder="From date..."
+            type="date"
+            functionIcon="stopwatch"
+            functionClick="currentDate"
             v-model="$store.state.report.fromDate"
           />
         </div>
@@ -28,6 +31,9 @@
             :class="$style.input"
             icon="calendar"
             placeholder="To date..."
+            type="date"
+            functionIcon="stopwatch"
+            functionClick="currentDate"
             v-model="$store.state.report.toDate"
           />
         </div>
